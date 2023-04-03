@@ -1,11 +1,6 @@
 ﻿using FrooxEngine;
 using HarmonyLib;
 using NeosModLoader;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.Remoting;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CanIJoinYou
@@ -15,7 +10,7 @@ namespace CanIJoinYou
         public override string Name => "CanIJoinYou";
         public override string Author => "LeCloutPanda";
         public override string Version => "1.0.0";
-        public override string Link => "Deez Nuts";
+        public override string Link => "https://github.com/LeCloutPanda/CanIJoinYou";
 
         public static ModConfiguration config;
 
@@ -64,15 +59,11 @@ namespace CanIJoinYou
                     case HostAccessPermission.Allowed:
                         __instance.Engine.Security.RemoveAccessPermission($"{joinRequest.userID}", 69420);
                         return JoinGrant.Allow();
-                        break;
+
                     case HostAccessPermission.Denied:
-                        __instance.Engine.Security.RemoveAccessPermission($"{joinRequest.userID}", 69420);
-                        return JoinGrant.Deny(rejectMessage);
-                        break;
                     case HostAccessPermission.Ignored:
                         __instance.Engine.Security.RemoveAccessPermission($"{joinRequest.userID}", 69420);
                         return JoinGrant.Deny(rejectMessage);
-                        break;
                 }
 
                 // Because this uses the Network Access stuff we gotta remove the new entry otherwise it will just keep denying/allowing the user who would like to join based on if the host says yes or no
