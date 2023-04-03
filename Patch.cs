@@ -37,6 +37,15 @@ namespace CanIJoinYou
         [AutoRegisterConfigKey] private static ModConfigurationKey<bool> ENABLED = new ModConfigurationKey<bool>("Mod Active", "", () => false);
         [AutoRegisterConfigKey] private static ModConfigurationKey<Responses> RESPONSE = new ModConfigurationKey<Responses>("Response", "Generic response sent to the user upon denying their request.", () => Responses.Request_Denied);
 
+        public override void OnEngineInit()
+        {
+            config = GetConfiguration();
+            config.Save(true);
+
+            Harmony harmony = new Harmony($"dev.{Author}.{Name}");
+            harmony.PatchAll();
+        }
+
         class CanIJoinYou
         {
             [HarmonyPatch(typeof(World), "VerifyJoinRequest")]
